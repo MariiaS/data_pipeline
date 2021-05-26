@@ -18,6 +18,7 @@ def add_address_data_hb(dataframe):
         geo_row = ser.to_frame().transpose()
         geo_row = geo_row.drop(['IPv4'], axis=1)
         geo_dataframe = geo_dataframe.append(geo_row, ignore_index=True)
+    geo_dataframe.replace('Not found', np.NaN)
     result = dataframe.join(geo_dataframe)
     return result
 
@@ -26,13 +27,9 @@ def add_country_wwc(dataframe):
     geo_dataframe = pd.DataFrame(columns=['country_name'])
     for i, row in dataframe.iterrows():
         location_row = dataframe.location.iloc[i]
-        print(location_row)
-        print(location_row['city'])
-        print(location_row['state'])
         country = get_country_from_city_state(location_row['city'], location_row['street'], location_row['postcode'])
         country_row = {'country_name': country}
         geo_dataframe = geo_dataframe.append(country_row, ignore_index=True)
-    geo_dataframe.replace('Not found', np.NaN)
     result = dataframe.join(geo_dataframe)
     return result
 

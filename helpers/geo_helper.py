@@ -1,5 +1,6 @@
 import json
 
+import numpy as np
 import pandas as pd
 import requests
 from geopy.geocoders import Nominatim
@@ -22,7 +23,7 @@ def get_country_from_city_state(street, city, postcode):
     if data is None:
         data = locator.geocode(postcode)
     if data is None:
-        country = ""
+        country = np.NaN
     else:
         country = data.address.rsplit(', ', 1)[1]
     return country
