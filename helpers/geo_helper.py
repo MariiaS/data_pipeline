@@ -1,6 +1,7 @@
+import json
+
 import pandas as pd
 import requests
-import json
 from geopy.geocoders import Nominatim
 
 df = pd.read_csv("../data/hb/2021/04/28/hb.csv")
@@ -15,17 +16,19 @@ def get_address_from_ip(ip_address):
     return json.loads(initial_string)
 
 
-def get_country_from_city_state(street, city):
+def get_country_from_city_state(street, city, postcode):
     locator = Nominatim(user_agent="geoapi")
     data = locator.geocode(city + " " + street)
     if data is None:
-        return ""
+        data = locator.geocode(postcode)
+    if data is None:
+        country = ""
     else:
         country = data.address.rsplit(', ', 1)[1]
-        return country
+    return country
 
 
 if __name__ == '__main__':
     print(df.head())
-    print(get_address_from_ip('190.235.91.244'))
-    print(get_country_from_city_state('5915 rua duque de caxias', 'mogi das cruzes'))
+    print(get_address_from_ip('0.0.0.0'))
+    print(get_country_from_city_state('', 'westminster', ''))

@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 
 from helpers.geo_helper import get_address_from_ip, get_country_from_city_state
@@ -28,9 +29,10 @@ def add_country_wwc(dataframe):
         print(location_row)
         print(location_row['city'])
         print(location_row['state'])
-        country = get_country_from_city_state(location_row['city'], location_row['street'])
+        country = get_country_from_city_state(location_row['city'], location_row['street'], location_row['postcode'])
         country_row = {'country_name': country}
         geo_dataframe = geo_dataframe.append(country_row, ignore_index=True)
+    geo_dataframe.replace('Not found', np.NaN)
     result = dataframe.join(geo_dataframe)
     return result
 
