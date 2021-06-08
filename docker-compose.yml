@@ -1,6 +1,6 @@
 version: "3.8"
 services:
   app :
-    build: ./data_processor/
+    build: ./data_pipeline/
   db:
     build: ./database/
