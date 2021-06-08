@@ -5,8 +5,13 @@ The selected database is postgreSQL, just because it's free, works well with Doc
 
 The Pipeline class is responsible for creating the structure for the data pipeline, it contains the main stages which can be reused during the pipeline run depending on the needs. 
 In order to initialize the pipeline, input arguments needed: game name and the date in the format "YYYY-MM-DD"
+The tests are stored in the tests folder and contains basic checks of the function. Much more tests should be written :c 
 
-
+Main principles followed: 
+1. Clean code - code should speak for itself, not comments
+2. KISS - simple and clear code
+3. PEP8 whenever possible. I know I messed up a bit with imports.
+4. Functional programming - create pure functions whenever possible
 
 ## Installation
 
@@ -26,3 +31,12 @@ In order to initialize the pipeline, input arguments needed: game name and the d
 4. The json file has a nested structure, and parsing of json into not-nested dataframe/sql is not covered, can be done more accurate without conversion to dataframe.
 5. db could be done much better, for instance turn to lower case main fields such as gender, to have unified information in the tables
 6. Also, the architecture of the database can be dome much more accurate - collect the user data at the same table from both games, create separate field for the game name
+
+## Questions
+1. Could you find what is the gender ratio in each game? -> The test is written an is executed during the application running
+2. Try to list the youngest and oldest player per country. -> The test is written an is executed during the application running
+3. If you suddenly had millions of new events for the accounts to process per day, how would
+you make the data pipeline faster and more scalable and more reliable? 
+Bonus) Can you summarize a list of principles you would follow when developing an event pipeline?
+   A: I would create a scheduled pipeline, which would be executed with some time interval throughout the day, whereas before it is executed the data is stored into the files 
+   with the limit of lines written, 1000 per file. The name of the file will include the timestamp as well, so that the application could execute files one by one.

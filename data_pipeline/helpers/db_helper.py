@@ -52,6 +52,7 @@ def get_gender_ratio(game_name):
     return ratio
 
 
+# Test purposes only
 def get_youngest_player_by_country(game_name):
     table_name = game_name + 'users'
     result = db.execute(
@@ -60,13 +61,10 @@ def get_youngest_player_by_country(game_name):
         print(row)
 
 
+# Test purposes only
 def get_oldest_player_by_country(game_name):
     table_name = game_name + 'users'
     result = db.execute(
         "SELECT distinct on (country_name) * from " + table_name + " order by country_name, CAST(dob AS DATE) asc")
-    for row in result:
-        print(row)
-    result = db.execute(
-        "SELECT * from " + table_name + " order by CAST(dob AS DATE) asc")
     for row in result:
         print(row)
