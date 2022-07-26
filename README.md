@@ -1,16 +1,16 @@
 ## Architecture
 Main application is in the _data_pipeline_ folder.
 The settings for the Docker to connect to database are stored in _database_ folder.
-The selected database is postgreSQL, just because it's free, works well with Docker and can be easily maintained.
+The selected database is postgreSQL because it's free, works well with Docker and can be easily maintained.
 
 The Pipeline class is responsible for creating the structure for the data pipeline, it contains the main stages which can be reused during the pipeline run depending on the needs. 
 In order to initialize the pipeline, input arguments needed: game name and the date in the format "YYYY-MM-DD"
-The tests are stored in the tests folder and contains basic checks of the function. Much more tests should be written :c 
+The tests are stored in the tests folder and contains basic checks of the function. 
 
 Main principles followed: 
 1. Clean code - code should speak for itself, not comments
 2. KISS - simple and clear code
-3. PEP8 whenever possible. I know I messed up a bit with imports.
+3. PEP8 whenever possible.
 4. Functional programming - create pure functions whenever possible
 
 ## Installation
